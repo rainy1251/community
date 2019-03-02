@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_193"
+        android:orientation="vertical"
+
+        >
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_193"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12"
+            app:indicator_drawable_selected="@drawable/selecter_oval"
+            app:indicator_drawable_unselected="@drawable/unselecter_oval"
+            app:indicator_height="6dp"
+            app:indicator_margin="6dp"
+            app:indicator_width="6dp" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:background="@color/mengban"
+            android:layout_marginLeft="@dimen/dp_22"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/dp_80"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:layout_marginLeft="@dimen/dp_22"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/dp_80"/>
+
+    </RelativeLayout>
+</LinearLayout>

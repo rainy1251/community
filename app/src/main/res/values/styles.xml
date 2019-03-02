@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#D63146</item>
+        <item name="colorPrimaryDark">#D63146</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.Main" parent="Base.AppTheme">
+    </style>
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#D63146</item>
+        <item name="colorPrimaryDark">#D63146</item>
+        <item name="colorAccent">#D63146</item>
+    </style>
+
+    <style name="tab_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">10sp</item>
+        <!--<item name="android:background">@drawable/tab_menu_bg_selector</item>-->
+        <item name="android:drawablePadding">1dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>\
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/tab_titlecolor_selector</item>
+    </style>
+
+    <style name="wode_fragment_edittext">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColorHint">@color/line</item>
+    </style>
+
+</resources>

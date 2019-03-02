@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#ffffff</color>
+    <color name="tab_bg_checked">#eeeeee</color>
+    <color name="tab_unchecked">#999999</color>
+    <color name="tab_checked">#333333</color>
+    <color name="line">#cccccc</color>
+    <color name="dark">#000000</color>
+    <color name="sq_bar">#D63146</color>
+    <color name="sq_text_gray">#FF999999</color>
+    <color name="sq_bg">#F6F6F6</color>
+    <color name="mengban">#33000000</color>
+    <color name="nred">#FF7F8F</color>
+</resources>

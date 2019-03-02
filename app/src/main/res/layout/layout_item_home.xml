@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:background="@color/sq_bar">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_25"
+            android:text="，\n欢迎来到社区助老服务平台"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_23"
+            android:textStyle="bold" />
+
+
+        <com.youth.banner.Banner
+            android:background="@color/sq_bar"
+            android:id="@+id/banner"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_40"
+            android:layout_below="@+id/tv_name"
+            android:layout_alignParentRight="true"
+            app:indicator_drawable_selected="@drawable/selecter_juxingl"
+            app:indicator_drawable_unselected="@drawable/unselecter_juxing"
+            app:indicator_height="4dp"
+            app:indicator_margin="6dp"
+            app:indicator_width="10dp" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_13"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_31"
+            android:layout_marginBottom="@dimen/dp_55"
+            android:background="@drawable/shape_sanjiao" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_37"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_18"
+            android:background="@drawable/yuan_tag_red"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_15"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/sp_14" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
