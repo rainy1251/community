@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_10">
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            android:text="公告"
+            android:textColor="@color/dark"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_message"
+            android:textColor="@color/dark"/>
+        <ImageView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/iv_audio"
+            android:layout_below="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/audio1"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -49,6 +49,7 @@ import com.service.community.net.JsonGenericsSerializator;
 import com.service.community.ui.activity.AdActivity;
 import com.service.community.ui.activity.EditUserDetailActivity;
 import com.service.community.ui.activity.MoreServiceActivity;
+import com.service.community.ui.activity.NoticeListActivity;
 import com.service.community.ui.activity.RegisterActivity;
 import com.service.community.ui.activity.SessionListActivity;
 import com.service.community.ui.base.BaseFragment;
@@ -92,6 +93,8 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
     ImageView iv_audio3;
     @BindView(R.id.tv_area)
     TextView tvArea;
+    @BindView(R.id.tv_more)
+    TextView tvMore;
     @BindView(R.id.tv_temperature)
     TextView tvTemperature;
     @BindView(R.id.tv_weather)
@@ -383,33 +386,34 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
 
 
     @OnClick({R.id.ll_session1, R.id.ll_session2, R.id.ll_session3, R.id.ll_session4, R.id.ll_session5,
-            R.id.ll_session6, R.id.ll_session7, R.id.ll_session8, R.id.iv_audio1, R.id.iv_audio2, R.id.iv_audio3})
+            R.id.ll_session6, R.id.ll_session7, R.id.ll_session8, R.id.iv_audio1, R.id.iv_audio2,
+            R.id.iv_audio3, R.id.tv_more})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_session1:
                 String token = SPUtils.getString("token");
-                if (token.equals("")){
+                if (token.equals("")) {
                     showLoginDialog();
                     return;
                 }
-                if (address==null){
+                if (address == null) {
                     showSetAddressDialog();
                     return;
                 }
-                if (address.isEmpty()){
+                if (address.isEmpty()) {
                     showSetAddressDialog();
                     return;
                 }
-                SPUtils.save(Contents.GOSHOPPING,true);
+                SPUtils.save(Contents.GOSHOPPING, true);
                 getAccid(1);
                 break;
             case R.id.ll_session2:
-                SPUtils.save(Contents.GOSHOPPING,false);
+                SPUtils.save(Contents.GOSHOPPING, false);
                 getAccid(2);
 
                 break;
             case R.id.ll_session3:
-                SPUtils.save(Contents.GOSHOPPING,false);
+                SPUtils.save(Contents.GOSHOPPING, false);
                 getAccid(3);
 
                 break;
@@ -420,17 +424,16 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                 showPhoneDialog();
                 break;
             case R.id.ll_session6:
-                SPUtils.save(Contents.GOSHOPPING,false);
+                SPUtils.save(Contents.GOSHOPPING, false);
                 getAccid(4);
                 break;
             case R.id.ll_session7:
-                SPUtils.save(Contents.GOSHOPPING,false);
-                 getAccid(5);
-               // sendp2p("51");
+                SPUtils.save(Contents.GOSHOPPING, false);
+                getAccid(5);
+                // sendp2p("51");
                 break;
             case R.id.ll_session8:
-                Intent intent = new Intent(getActivity(), MoreServiceActivity.class);
-                getActivity().startActivity(intent);
+                go2Activity(MoreServiceActivity.class);
                 break;
             case R.id.iv_audio1:
                 startmusic(0);
@@ -441,7 +444,15 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
             case R.id.iv_audio3:
                 startmusic(2);
                 break;
+            case R.id.tv_more:
+                go2Activity(NoticeListActivity.class);
+                break;
         }
+    }
+
+    private void go2Activity(Class<?> activity) {
+        Intent intent = new Intent(getActivity(), activity);
+        getActivity().startActivity(intent);
     }
 
     private void sendp2p(String userId) {
