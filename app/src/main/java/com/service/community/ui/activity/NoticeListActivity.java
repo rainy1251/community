@@ -56,7 +56,7 @@ public class NoticeListActivity extends BaseActivity {
      * 请求公告
      */
     private void requestNoticeList() {
-        NetUtils.getBuildByGet("/app/notice/list?page=1&limit=10&sort=id&order=desc")
+        NetUtils.getBuildByGet("/app/notice/list?page=1&limit=30&sort=id&order=desc")
                 .execute(new GenericsCallback<AdListBean>(new JsonGenericsSerializator()) {
                     @Override
                     public void onResponse(AdListBean response, int id) {

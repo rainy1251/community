@@ -53,9 +53,9 @@
     <application
         android:name=".ui.base.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/cicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Main"
         android:usesCleartextTraffic="true"
@@ -74,7 +74,7 @@
         <!-- android:value="2f96da734c3c0a7645185eaa62851f0d" /> -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="f0068bbf03575ba5f96611f612ee59ec" />
+            android:value="82a045ae60b0c9df545437b464986b08" />
 
         <!-- 云信后台服务，请使用独立进程。 -->
         <service

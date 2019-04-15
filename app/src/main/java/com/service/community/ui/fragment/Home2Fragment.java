@@ -48,6 +48,7 @@ import com.service.community.net.GenericsCallback;
 import com.service.community.net.JsonGenericsSerializator;
 import com.service.community.ui.activity.AdActivity;
 import com.service.community.ui.activity.EditUserDetailActivity;
+import com.service.community.ui.activity.MainActivity;
 import com.service.community.ui.activity.MoreServiceActivity;
 import com.service.community.ui.activity.NoticeListActivity;
 import com.service.community.ui.activity.RegisterActivity;
@@ -662,4 +663,6 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
 
         builder.create().show();
     }
+
+
 }

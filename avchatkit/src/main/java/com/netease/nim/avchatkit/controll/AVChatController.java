@@ -2,6 +2,7 @@ package com.netease.nim.avchatkit.controll;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
@@ -131,7 +132,7 @@ public class AVChatController {
             @Override
             public void onFailed(int code) {
                 LogUtil.d(TAG, "avChat call failed code->" + code);
-
+                Log.d("rain",code+"=========");
                 if (code == ResponseCode.RES_FORBIDDEN) {
                     Toast.makeText(context, R.string.avchat_no_permission, Toast.LENGTH_SHORT).show();
                 } else {

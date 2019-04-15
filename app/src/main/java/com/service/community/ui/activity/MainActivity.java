@@ -16,6 +16,10 @@ import android.webkit.WebView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.service.community.R;
 import com.service.community.avchat.PermissionUtils;
 import com.service.community.ui.base.BaseActivity;
@@ -48,6 +52,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioGroup rgMenu;
     private Fragment preFragment;
     private List<Fragment> fragments;
+    private AlertDialog alertDialog;
 
     @Override
     public int getLayoutId() {
@@ -80,7 +85,21 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void initListener() {
+        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(
+                new Observer<StatusCode>() {
+                    public void onEvent(StatusCode status) {
 
+                        if (status.toString().equals("UNLOGIN")) {
+                            showLoginDialog();
+
+                        } else if (status.toString().equals("LOGINED")) {
+                            if (alertDialog != null) {
+
+                                alertDialog.dismiss();
+                            }
+                        }
+                    }
+                }, true);
     }
 
     @Override
@@ -203,5 +222,30 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
            changeFragment(0);
             rbMenuHome.setChecked(true);
         }
+    }
+
+    public void showLoginDialog() {
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        // 设置参数
+        builder.setTitle("提示")
+                .setMessage("请先登录")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {// 积极
+
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                        intent.putExtra("isLogin", true);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 }
