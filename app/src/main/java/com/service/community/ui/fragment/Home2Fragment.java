@@ -1,21 +1,16 @@
 package com.service.community.ui.fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,34 +24,28 @@ import com.amap.api.services.weather.LocalWeatherLive;
 import com.amap.api.services.weather.LocalWeatherLiveResult;
 import com.amap.api.services.weather.WeatherSearch;
 import com.amap.api.services.weather.WeatherSearchQuery;
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.uikit.Contents;
-import com.netease.nim.uikit.SPUtils;
-import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nim.uikit.impl.NimUIKitImpl;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.auth.AuthService;
-import com.netease.nimlib.sdk.auth.LoginInfo;
+
 import com.service.community.R;
-import com.service.community.avchat.PermissionUtils;
+
+import com.service.community.hxim.ChatActivity;
+import com.service.community.hxim.ChatListActivity;
+import com.service.community.hxim.Constant;
 import com.service.community.model.AdListBean;
 import com.service.community.model.ImAccidBean;
-import com.service.community.model.StateBean;
 import com.service.community.model.UserInfoBean;
 import com.service.community.net.GenericsCallback;
 import com.service.community.net.JsonGenericsSerializator;
 import com.service.community.ui.activity.AdActivity;
 import com.service.community.ui.activity.EditUserDetailActivity;
-import com.service.community.ui.activity.MainActivity;
 import com.service.community.ui.activity.MoreServiceActivity;
 import com.service.community.ui.activity.NoticeListActivity;
 import com.service.community.ui.activity.RegisterActivity;
-import com.service.community.ui.activity.SessionListActivity;
 import com.service.community.ui.base.BaseFragment;
-import com.service.community.ui.utils.MyLog;
+import com.service.community.ui.utils.Constants;
 import com.service.community.ui.utils.MyToast;
 import com.service.community.ui.utils.NetUtils;
+import com.hyphenate.easeui.SPUtils;
+import com.service.community.ui.utils.PermissionUtils;
 import com.service.community.ui.utils.UiUtils;
 import com.service.community.ui.view.BannerView;
 import com.service.community.ui.view.Lunar;
@@ -74,7 +63,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -256,7 +244,8 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
         tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SessionListActivity.class);
+
+                Intent intent = new Intent(getActivity(), ChatListActivity.class);
                 startActivity(intent);
             }
         });
@@ -277,9 +266,9 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                     String mobileTwo = response.data.mobileTwo;
                     String mobileThree = response.data.mobileThree;
                     address = response.data.address;
-                    SPUtils.save(Contents.MobileOne, mobileOne);
-                    SPUtils.save(Contents.MobileTwo, mobileTwo);
-                    SPUtils.save(Contents.MobileThree, mobileThree);
+                    SPUtils.save(Constants.MobileOne, mobileOne);
+                    SPUtils.save(Constants.MobileTwo, mobileTwo);
+                    SPUtils.save(Constants.MobileThree, mobileThree);
                     tvName.setText(nickname + "，" + mobile + "\n欢迎来到社区助老服务平台");
 
                 }
@@ -405,16 +394,16 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                     showSetAddressDialog();
                     return;
                 }
-                SPUtils.save(Contents.GOSHOPPING, true);
+                SPUtils.save(Constants.GOSHOPPING, true);
                 getAccid(1);
                 break;
             case R.id.ll_session2:
-                SPUtils.save(Contents.GOSHOPPING, false);
+                SPUtils.save(Constants.GOSHOPPING, false);
                 getAccid(2);
 
                 break;
             case R.id.ll_session3:
-                SPUtils.save(Contents.GOSHOPPING, false);
+                SPUtils.save(Constants.GOSHOPPING, false);
                 getAccid(3);
 
                 break;
@@ -425,11 +414,11 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                 showPhoneDialog();
                 break;
             case R.id.ll_session6:
-                SPUtils.save(Contents.GOSHOPPING, false);
+                SPUtils.save(Constants.GOSHOPPING, false);
                 getAccid(4);
                 break;
             case R.id.ll_session7:
-                SPUtils.save(Contents.GOSHOPPING, false);
+                SPUtils.save(Constants.GOSHOPPING, false);
                 getAccid(5);
                 // sendp2p("51");
                 break;
@@ -457,11 +446,15 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
     }
 
     private void sendp2p(String userId) {
-        if (NimUIKit.getAccount() != null) {
-            NimUIKit.startP2PSession(getActivity(), userId);
-        } else {
-            MyToast.show("请先登录");
-        }
+
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        intent.putExtra(Constant.EXTRA_USER_ID,userId );
+        startActivity(intent);
+//        if (NimUIKit.getAccount() != null) {
+//            NimUIKit.startP2PSession(getActivity(), userId);
+//        } else {
+//            MyToast.show("请先登录");
+//        }
     }
 
     public void callPhone(String phoneNum) {
@@ -476,43 +469,6 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
 
     public static final int REQUEST_CALL_PERMISSION = 10111;
 
-    public void doLogin(String account, String token) {
-        //MyToast.show(account+token);
-
-        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo param) {
-                MyToast.show("登录IM成功");
-                String account = param.getAccount();
-                String token = param.getToken();
-                com.netease.nim.uikit.SPUtils.save(Contents.IMAccoune, account);
-                com.netease.nim.uikit.SPUtils.save(Contents.IMToken, token);
-                NimUIKit.setAccount(account);
-                AVChatKit.setAccount(account);
-            }
-
-            @Override
-            public void onFailed(int code) {
-
-                if (code == 302 || code == 404) {
-                    MyToast.show("登录IM失败");
-                } else {
-                    MyToast.show("登录IM失败:" + code);
-                }
-
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-                MyToast.show("登录IM异常");
-
-            }
-
-
-        });
-
-//
-    }
 
     boolean isplay = true;
 
@@ -560,13 +516,13 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                 }
             }
         });
+
     }
 
-
     public void showPhoneDialog() {
-        String mobileOne = SPUtils.getString(Contents.MobileOne);
-        String mobileTwo = SPUtils.getString(Contents.MobileTwo);
-        String mobileThree = SPUtils.getString(Contents.MobileThree);
+        String mobileOne = SPUtils.getString(Constants.MobileOne);
+        String mobileTwo = SPUtils.getString(Constants.MobileTwo);
+        String mobileThree = SPUtils.getString(Constants.MobileThree);
         final String[] mobiles = new String[]{mobileOne, mobileTwo, mobileThree};
         if (mobileOne.equals("") && mobileTwo.equals("") && mobileThree.equals("")) {
 

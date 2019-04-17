@@ -17,8 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amap.api.services.weather.LocalWeatherLive;
-import com.netease.nim.uikit.SPUtils;
-import com.netease.nim.uikit.api.NimUIKit;
+import com.hyphenate.easeui.SPUtils;
 import com.service.community.R;
 import com.service.community.model.AdListBean;
 import com.service.community.model.UserEditBean;
@@ -348,11 +347,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     context.startActivity(intent);
                     break;
                 default:
-                    if (NimUIKit.getAccount() != null) {
-                        NimUIKit.startP2PSession(context, "32");
-                    } else {
-                        MyToast.show("请先登录");
-                    }
+//                    if (NimUIKit.getAccount() != null) {
+//                        NimUIKit.startP2PSession(context, "32");
+//                    } else {
+//                        MyToast.show("请先登录");
+//                    }
                     break;
             }
         }

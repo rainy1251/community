@@ -1,13 +1,10 @@
 package com.service.community.ui.utils;
 
-import com.netease.nim.uikit.SPUtils;
+import com.hyphenate.easeui.SPUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
-import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Administrator on 2018/3/17.

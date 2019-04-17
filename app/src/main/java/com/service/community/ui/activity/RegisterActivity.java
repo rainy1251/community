@@ -1,17 +1,16 @@
 package com.service.community.ui.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.uikit.Contents;
-import com.netease.nim.uikit.SPUtils;
-import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.SPUtils;
 import com.service.community.R;
+import com.service.community.hxim.DemoHelper;
 import com.service.community.model.IMBean;
 import com.service.community.model.StateBean;
 import com.service.community.net.GenericsCallback;
@@ -164,11 +163,15 @@ public class RegisterActivity extends BaseActivity {
                             String token = response.data.token;
                             SPUtils.save("token", token);
                             SPUtils.save("userId", userId);
-                            doLogin(userId, response.data.imToken);
+                            //doLogin(userId, response.data.imToken);
+                            String username = etUsername.getText().toString().trim();
+                            loginIM(userId,username);
                             SPUtils.save("IMToken", response.data.imToken);
                             if (!isLogin) {
                                 Intent intent = new Intent(RegisterActivity.this, EditUserDetailActivity.class);
                                 startActivity(intent);
+                            }else{
+
                             }
                             finish();
                             EventBus.getDefault().post(new MessageEvent("更新"));
@@ -178,7 +181,27 @@ public class RegisterActivity extends BaseActivity {
                     }
                 });
     }
+    private void loginIM(String userId,String pwd) {
+        EMClient.getInstance().login(userId, pwd, new EMCallBack() {//回调
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                Log.d("main", "登录聊天服务器成功！");
+                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+            }
 
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                Log.d("main", "登录聊天服务器失败！" + message + "," + code);
+            }
+        });
+    }
     /**
      * 请求im登陆令牌
      *
@@ -199,7 +222,7 @@ public class RegisterActivity extends BaseActivity {
                             if (index2 - index1 > 8) {
 
                                 String IMToken = response.data.substring(index1 + 8, index2);
-                                doLogin(userId, IMToken);
+
                                 SPUtils.save("IMToken", IMToken);
                             }
                         }
@@ -211,41 +234,5 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    public void doLogin(String account, String token) {
-
-        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo param) {
-                MyToast.show("登录IM成功");
-                String account = param.getAccount();
-                String token = param.getToken();
-                SPUtils.save(Contents.IMAccoune, account);
-                SPUtils.save(Contents.IMToken, token);
-                NimUIKit.setAccount(account);
-                AVChatKit.setAccount(account);
-            }
-
-            @Override
-            public void onFailed(int code) {
-
-                if (code == 302 || code == 404) {
-                    MyToast.show("登录IM失败");
-                } else {
-                    MyToast.show("登录IM失败:" + code);
-                }
-
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-                MyToast.show("登录IM异常");
-
-            }
-
-
-        });
-
-//
-    }
 
 }
