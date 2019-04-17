@@ -132,7 +132,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/horizontal_slide" />
         <!-- 视频通话 -->
         <activity
@@ -140,7 +140,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/horizontal_slide" />
         <activity android:name=".hxim.ChatListActivity" />
         <activity android:name=".hxim.ChatActivity" />

@@ -19,6 +19,8 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.RobotUser;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.easeui.widget.presenter.EaseChatRowPresenter;
 import com.hyphenate.util.EasyUtils;
@@ -61,6 +63,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
      * if it is chatBot
      */
     private boolean isRobot;
+    private String nickname;
+    private String avatar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -250,7 +254,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
         }
         String userName = SPUtils.getString("nickname");
         if (!TextUtils.isEmpty(userName)) {
-            message.setAttribute("nickname",userName);
+            message.setAttribute("nickname", userName);
         }
     }
 
@@ -345,9 +349,23 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
         if (!EMClient.getInstance().isConnected()) {
             Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
         } else {
-            startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", toChatUsername)
-                    .putExtra("isComingCall", false));
-            // voiceCallBtn.setEnabled(false);
+            if (EaseUserUtils.getUserInfo(toChatUsername) != null) {
+                EaseUser user = EaseUserUtils.getUserInfo(toChatUsername);
+                if (user != null) {
+                    avatar = user.getAvatar();
+                    nickname = user.getNickname();
+                }
+            }
+
+            Intent intent = new Intent(getActivity(), VoiceCallActivity.class);
+            intent.putExtra("username", toChatUsername);
+            intent.putExtra("isComingCall", false);
+            if (avatar!=null){
+
+                intent.putExtra("avatar", avatar);
+                intent.putExtra("nickname", nickname);
+            }
+            startActivity(intent);
             inputMenu.hideExtendMenuContainer();
         }
     }
@@ -359,10 +377,22 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
         if (!EMClient.getInstance().isConnected())
             Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
         else {
-            startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
-                    .putExtra("isComingCall", false));
-            // videoCallBtn.setEnabled(false);
+            if (EaseUserUtils.getUserInfo(toChatUsername) != null) {
+                EaseUser user = EaseUserUtils.getUserInfo(toChatUsername);
+                if (user != null) {
+                    nickname = user.getNickname();
+                }
+            }
+
+            Intent intent = new Intent(getActivity(), VideoCallActivity.class);
+            intent.putExtra("username", toChatUsername);
+            intent.putExtra("isComingCall", false);
+            if (nickname!=null){
+                intent.putExtra("nickname", nickname);
+            }
+            startActivity(intent);
             inputMenu.hideExtendMenuContainer();
+
         }
     }
 

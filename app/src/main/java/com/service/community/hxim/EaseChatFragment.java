@@ -167,7 +167,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
-        nickname = DemoHelper.getInstance().getUserProfileManager().getCurrentUserInfo().getNickname();
 
         this.turnOnTyping = turnOnTyping();
 
@@ -1310,31 +1309,42 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         EaseCustomChatRowProvider onSetCustomChatRowProvider();
     }
     /**
-     * make a voice call
-     */
-    protected void startVoiceCall() {
-        if (!EMClient.getInstance().isConnected()) {
-            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
-        } else {
-            startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", toChatUsername)
-                    .putExtra("isComingCall", false));
-            // voiceCallBtn.setEnabled(false);
-            inputMenu.hideExtendMenuContainer();
-        }
-    }
-
-    /**
-     * make a video call
-     */
-    protected void startVideoCall() {
-        if (!EMClient.getInstance().isConnected())
-            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
-        else {
-            startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
-                    .putExtra("isComingCall", false));
-            // videoCallBtn.setEnabled(false);
-            inputMenu.hideExtendMenuContainer();
-        }
-    }
+    * make a voice call
+    */
+//    protected void startVoiceCall() {
+//        if (!EMClient.getInstance().isConnected()) {
+//            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
+//        } else {
+//            if (EaseUserUtils.getUserInfo(toChatUsername) != null) {
+//                EaseUser user = EaseUserUtils.getUserInfo(toChatUsername);
+//                if (user != null) {
+//                   nickname = user.getNickname();
+//                }
+//            }
+//            if (nickname==null){
+//
+//                startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", "tgfewgfwe").putExtra("isComingCall", false));
+//            }else{
+//
+//                startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", nickname).putExtra("isComingCall", false));
+//            }
+//            // voiceCallBtn.setEnabled(false);
+//            inputMenu.hideExtendMenuContainer();
+//        }
+//    }
+//
+//    /**
+//     * make a video call
+//     */
+//    protected void startVideoCall() {
+//        if (!EMClient.getInstance().isConnected())
+//            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
+//        else {
+//            startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
+//                    .putExtra("isComingCall", false));
+//            // videoCallBtn.setEnabled(false);
+//            inputMenu.hideExtendMenuContainer();
+//        }
+//    }
 
 }

@@ -34,6 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -64,6 +67,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 	private LinearLayout voiceContronlLayout;
     private TextView netwrokStatusVeiw;
     private boolean monitor = false;
+    private ImageView swing_card;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
         TextView nickTextView = (TextView) findViewById(R.id.tv_nick);
         TextView durationTextView = (TextView) findViewById(R.id.tv_calling_duration);
 		chronometer = (Chronometer) findViewById(R.id.chronometer);
+        swing_card = (ImageView) findViewById(R.id.swing_card);
 		voiceContronlLayout = (LinearLayout) findViewById(R.id.ll_voice_control);
 		netwrokStatusVeiw = (TextView) findViewById(R.id.tv_network_status);
 
@@ -105,7 +110,17 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 
 		username = getIntent().getStringExtra("username");
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
-		nickTextView.setText(username);
+        String  nickname = getIntent().getStringExtra("nickname");
+        String  avatar = getIntent().getStringExtra("avatar");
+        if (avatar != null&&nickname!=null) {
+
+            Glide.with(this).load(avatar).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(swing_card);
+            nickTextView.setText(nickname);
+        } else {
+            Glide.with(this).load("https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&quality=90&thumbnail=64x64").apply(RequestOptions.bitmapTransform(new CircleCrop())).into(swing_card);
+            nickTextView.setText(username);
+        }
+
 		if (!isInComingCall) {// outgoing call
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.em_outgoing, 1);
