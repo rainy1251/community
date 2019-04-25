@@ -28,6 +28,7 @@ import com.hyphenate.util.PathUtil;
 import com.service.community.R;
 import com.service.community.ui.activity.MainActivity;
 import com.hyphenate.easeui.SPUtils;
+import com.service.community.ui.utils.MyToast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -87,6 +88,14 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
             }
         }
         super.setUpView();
+        Bundle arguments = getArguments();
+        String nickname = arguments.getString(EaseConstant.EXTRA_USER_NICKNAME);
+        if (nickname!=null){
+
+           titleBar.setTitle(nickname);
+       }else{
+           titleBar.setTitle(toChatUsername);
+       }
         // set click listener
         titleBar.setLeftLayoutClickListener(new OnClickListener() {
 
@@ -360,7 +369,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
             Intent intent = new Intent(getActivity(), VoiceCallActivity.class);
             intent.putExtra("username", toChatUsername);
             intent.putExtra("isComingCall", false);
-            if (avatar!=null){
+            if (avatar != null) {
 
                 intent.putExtra("avatar", avatar);
                 intent.putExtra("nickname", nickname);
@@ -387,7 +396,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
             Intent intent = new Intent(getActivity(), VideoCallActivity.class);
             intent.putExtra("username", toChatUsername);
             intent.putExtra("isComingCall", false);
-            if (nickname!=null){
+            if (nickname != null) {
                 intent.putExtra("nickname", nickname);
             }
             startActivity(intent);

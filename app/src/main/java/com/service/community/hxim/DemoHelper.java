@@ -212,15 +212,15 @@ public class DemoHelper {
         /**
          * NOTE:你需要设置自己申请的账号来使用三方推送功能，详见集成文档
          */
-        EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
-        builder.enableVivoPush() // 需要在AndroidManifest.xml中配置appId和appKey
-                .enableMeiZuPush("118654", "eaf530ff717f479cab93714d45972ff6")
-                .enableMiPush("2882303761517426801", "5381742660801")
-                .enableOppoPush("65872dc4c26a446a8f29014f758c8272",
-                        "9385ae4308d64b36bf82bc4d73c4369d")
-                .enableHWPush() // 需要在AndroidManifest.xml中配置appId
-                .enableFCM("921300338324");
-        options.setPushConfig(builder.build());
+//        EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
+//        builder.enableVivoPush() // 需要在AndroidManifest.xml中配置appId和appKey
+//                .enableMeiZuPush("118654", "eaf530ff717f479cab93714d45972ff6")
+//                .enableMiPush("2882303761517426801", "5381742660801")
+//                .enableOppoPush("65872dc4c26a446a8f29014f758c8272",
+//                        "9385ae4308d64b36bf82bc4d73c4369d")
+//                .enableHWPush() // 需要在AndroidManifest.xml中配置appId
+//                .enableFCM("921300338324");
+//        options.setPushConfig(builder.build());
 
         //set custom servers, commonly used in private deployment
         if (demoModel.isCustomServerEnable() && demoModel.getRestServer() != null && demoModel.getIMServer() != null) {
@@ -1281,26 +1281,26 @@ public class DemoHelper {
             EaseUser currentUserInfo = getUserProfileManager().getCurrentUserInfo();
             return currentUserInfo;
         }
-        EaseUser easeUser;
+        EaseUser easeUser=null;
 
         if (contactList != null && contactList.containsKey(username)) {
-
+            easeUser = contactList.get(username);
+            if (easeUser == null) {
+                easeUser = new EaseUser(username);
+            } else {
+                if (!TextUtils.isEmpty(easeUser.getNickname())) { // 如果名字为空，则显示环信号码
+                    easeUser.setNickname(easeUser.getNickname());
+                }
+                if (!TextUtils.isEmpty(easeUser.getAvatar())) { // 如果名字为空，则显示环信号码
+                    easeUser.setAvatar(easeUser.getAvatar());
+                }
+            }
         } else { // 如果内存中没有，则将本地数据库中的取出到内存中。
             getContactList();
         }
         // // TODO 获取不在好友列表里的群成员具体信息，即陌生人信息，demo未实现
 
-        easeUser = contactList.get(username);
-        if (easeUser == null) {
-            easeUser = new EaseUser(username);
-        } else {
-            if (!TextUtils.isEmpty(easeUser.getNickname())) { // 如果名字为空，则显示环信号码
-                easeUser.setNickname(easeUser.getNickname());
-            }
-            if (!TextUtils.isEmpty(easeUser.getAvatar())) { // 如果名字为空，则显示环信号码
-                easeUser.setAvatar(easeUser.getAvatar());
-            }
-        }
+
         return easeUser;
 
 //        EaseUser user = null;
