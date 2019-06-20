@@ -11,7 +11,7 @@ public class JsonGenericsSerializator implements IGenericsSerializator {
 
     @Override
     public <T> T transform(String response, Class<T> classOfT) {
-      MyLog.show(response);
+       //  MyLog.show(response);
         return mGson.fromJson(response, classOfT);
     }
 

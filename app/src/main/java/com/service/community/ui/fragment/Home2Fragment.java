@@ -212,8 +212,8 @@ public class Home2Fragment extends BaseFragment implements WeatherSearch.OnWeath
                             tvMsgOne.setText("-" + textlist.get(0).message);
                             tvMsgTwo.setVisibility(View.GONE);
                         } else if (list.size() >= 2) {
-                            tvMsgOne.setText("-" + textlist.get(0).message);
-                            tvMsgTwo.setText("-" + textlist.get(1).message);
+                            tvMsgOne.setText("-" + UiUtils.delHTMLTag(textlist.get(0).message));
+                            tvMsgTwo.setText("-" + UiUtils.delHTMLTag(textlist.get(1).message));
                             tvMsgTwo.setVisibility(View.VISIBLE);
                         }
                         if (audiolist.size() > 0 && audiolist.size() < 2) {

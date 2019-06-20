@@ -9,6 +9,7 @@ import com.service.community.R;
 import com.service.community.model.AdListBean;
 import com.service.community.ui.adapter.base.BaseHolder;
 import com.service.community.ui.adapter.base.DefaultAdapter;
+import com.service.community.ui.utils.UiUtils;
 import com.service.community.ui.view.MessageNoticePlayEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +54,7 @@ public class NoticeListAdapter extends DefaultAdapter {
         protected void refreshView(final AdListBean.DatasBean.ItemBean.ListBean resultBean, final int position) {
                 if (resultBean.noticeType==1){
                     tvTitle.setText(resultBean.title);
-                    tvMessage.setText(resultBean.message);
+                    tvMessage.setText(UiUtils.delHTMLTag(resultBean.message));
                     ivAudio.setVisibility(View.GONE);
                 }else{
                     tvTitle.setText("语音公告");
