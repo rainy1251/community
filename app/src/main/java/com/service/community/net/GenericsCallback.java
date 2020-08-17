@@ -74,7 +74,7 @@ public abstract class GenericsCallback<T> extends Callback<T> {
     @Override
     public void onError(Call call, Exception e, int id) {
 
-
+MyLog.show(e.toString());
         if (e.toString().contains("400")) {
             if (mview != null) {
 

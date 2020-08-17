@@ -55,14 +55,14 @@ public class NetUtils {
 
     public static RequestCall getBuildByGet(String api) {
         String token = SPUtils.getString("token");
-        RequestCall build = OkHttpUtils.get().addHeader("X-communityapp-Token", token).url("http://47.95.206.250:8088"+api).build();
+        RequestCall build = OkHttpUtils.get().addHeader("X-communityapp-Token", token).url(Constants.BASE_URL+api).build();
 
         return build;
 
     }
     public static RequestCall getBuildByGetNoToken(String api) {
 
-        RequestCall build = OkHttpUtils.get().url("http://47.95.206.250:8088"+api).build();
+        RequestCall build = OkHttpUtils.get().url(Constants.BASE_URL+api).build();
 
         return build;
 

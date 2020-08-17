@@ -45,7 +45,7 @@ public class AdActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mWebview.loadUrl("http://vue.zhangxiaofu.cn/webview/productlist.html");
+        mWebview.loadUrl("http://39.105.211.152:8088/webview/productlist.html");
         mWebview.setWebViewClient(new MyWebViewClient());
     }
 
